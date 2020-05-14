@@ -14,7 +14,8 @@ function setup(){
     }
     var ball_options={
         density:1,
-        restitution:0.5
+        restitution:0.5,
+        isStatic:true
     }
     packageBody=Bodies.rectangle(600,20,220,40,package_options);
     ballBody=Bodies.circle(600,180,70,ball_options);
@@ -32,7 +33,8 @@ function setup(){
 function draw(){
     background(0);
     Engine.update(engine);
-    text("Press space bar to randomly oscillate the pendulum from left to right",10,20);
+    text("Press space bar to oscillate the pendulum from left to right with your mouse.",10,20) 
+    text("Press Enter to stop",10,40);
     rectMode(CENTER);
     fill("red");
     rect(packageBody.position.x,packageBody.position.y,220,40);
@@ -44,11 +46,14 @@ function draw(){
     line(packageBody.position.x,packageBody.position.y,ballBody.position.x,ballBody.position.y);
 }
 function keyPressed(){
-    if(keyCode===32){
-        ballBody.position.x=mouseX;
-        ballBody.position.y=mouseY;
+    if(keyCode==32){
+      Matter.Body.setStatic(ballBody,false);
+      ballBody.position.y=mouseY;
+      ballBody.position.x=mouseX;
     }
     else if (keyCode==ENTER){
-        ballBody.position.x=600;
+      ballBody.position.x=600;
+      ballBody.position.y=180;
+      Matter.Body.setStatic(ballBody,true);
     }
 }
