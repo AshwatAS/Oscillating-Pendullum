@@ -15,7 +15,7 @@ function setup(){
     var ball_options={
         density:1,
         restitution:0.5,
-        isStatic:true
+        isStatic:false
     }
     packageBody=Bodies.rectangle(600,20,220,40,package_options);
     ballBody=Bodies.circle(600,180,70,ball_options);
@@ -39,21 +39,19 @@ function draw(){
     fill("red");
     rect(packageBody.position.x,packageBody.position.y,220,40);
     ellipseMode(RADIUS);
-    fill("blue")
+    fill("blue");
     ellipse(ballBody.position.x,ballBody.position.y,70,70);
     strokeWeight(4);
     stroke("white");
     line(packageBody.position.x,packageBody.position.y,ballBody.position.x,ballBody.position.y);
-}
-function keyPressed(){
     if(keyCode==32){
-      Matter.Body.setStatic(ballBody,false);
-      ballBody.position.y=mouseY;
-      ballBody.position.x=mouseX;
-    }
-    else if (keyCode==ENTER){
-      ballBody.position.x=600;
-      ballBody.position.y=180;
-      Matter.Body.setStatic(ballBody,true);
-    }
+        //Matter.Body.setStatic(ballBody,false);
+        ballBody.position.y=mouseY;
+        ballBody.position.x=mouseX;
+      }
+      else if (keyCode==ENTER){
+        ballBody.position.x=600;
+        ballBody.position.y=180;
+        //Matter.Body.setStatic(ballBody,true);
+      }
 }
